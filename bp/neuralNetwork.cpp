@@ -154,9 +154,6 @@ void neuralNetwork::learn(std::string filename, double learningRate, int roops){
             resetCores();
         }
         
-        
-        teachFile.clear();
-        teachFile.seekg(0, std::fstream::beg);
         std::cout << i <<":"<< diff << std::endl;
         
     }

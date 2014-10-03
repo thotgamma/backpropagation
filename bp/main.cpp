@@ -10,11 +10,25 @@
 #include "neuralNetwork.h"
 
 neuralNetwork nnet;
+bool nnetLauncher(std::vector<std::string> inputVector);
 
 int main(int argc, const char * argv[]) {
     
-    
+    /*
     nnet.makeNewNetwork();
+    std::vector<std::string> inputVector;
+    while (true) {
+        std::cout << ">>";
+        std::string token;
+        std::getline(std::cin, token);
+        inputVector = nnet.split(token, ' ');
+        if (inputVector[0] == "exit") {
+            break;
+        }
+        nnetLauncher(inputVector);
+    }
+    */
+    
     nnet.learn("input.txt", 0.5, 5000);
     
     nnet.inputCore[1] = 0;
@@ -35,6 +49,7 @@ int main(int argc, const char * argv[]) {
     std::cout << "calc 1:" << nnet.outputCore[0] << std::endl;
     nnet.resetCores();
     
+    nnet.save("save");
     
     return 0;
 }
@@ -115,7 +130,7 @@ bool nnetLauncher(std::vector<std::string> inputVector){
             return false;
         }
         
-        nnet.discard();
+        //nnet.discard();
         return true;
         
     }else if(inputVector[0] == "help"){
