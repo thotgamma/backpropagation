@@ -37,8 +37,8 @@ public:
     
     neuralNetwork();
     void makeNewNetwork();
-    void load();
-    void save();
+    void load(std::string filename);
+    void save(std::string filename);
     void discard();
     void advanceCalc();
     void backwardCalc(double answer,double learningRate);

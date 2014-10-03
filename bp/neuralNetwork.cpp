@@ -163,7 +163,94 @@ void neuralNetwork::learn(std::string filename, double learningRate, int roops){
     //return diff;
 }
 
+void neuralNetwork::save(std::string filename){
+    std::ofstream network_scc(filename);
+    
+    network_scc << "[core]\n";
+    network_scc << CC_numberOfCoreIn;
+    network_scc << " ";
+    network_scc << CC_numberOfCoreHidd;
+    network_scc << " ";
+    network_scc << CC_numberOfCoreOut;
+    network_scc << "\n";
+    
+    network_scc << "[net]\n";
+    
+    //coreIN -> coreHidden
+    for (int i=0; i < CC_numberOfCoreIn; i++) {
+        for (int j=0; j < CC_numberOfCoreHidd; j++) {
+            network_scc << "0";
+            network_scc << " ";
+            network_scc << i;
+            network_scc << " ";
+            network_scc << j;
+            network_scc << " ";
+            network_scc << netIn2Hidd[i][j];
+            network_scc << "\n";
+        }
+    }
+    
+    //coreHidden -> coreOut
+    for (int i=0; i < CC_numberOfCoreHidd; i++) {
+        for (int j=0; j < CC_numberOfCoreOut; j++) {
+            network_scc << "1";
+            network_scc << " ";
+            network_scc << i;
+            network_scc << " ";
+            network_scc << j;
+            network_scc << " ";
+            network_scc << netIn2Hidd[i][j];
+            network_scc << "\n";
+        }
+    }
+    
+    network_scc.close();
+}
 
+void neuralNetwork::load(std::string filename){
+    std::ifstream network(filename);
+    std::string line;
+    
+    std::vector <std::string> coreLineVector;
+    std::vector <std::string> netLineVector;
+    
+    int from;
+    int dest;
+    
+    double weight;
+    
+    bool makeNetFlag = false;
+    
+    while (std::getline(network, line)) {
+        if (line == "[core]") {
+            std::getline(network, line);
+            coreLineVector = split(line, ' ');
+            
+            makeNetFlag = false;
+            
+        }
+        
+        
+        if (makeNetFlag) {
+            netLineVector = split(line, ' ');
+            std::stringstream(netLineVector[1]) >> from;
+            std::stringstream(netLineVector[2]) >> dest;
+            std::stringstream(netLineVector[3]) >> weight;
+            
+            if (netLineVector[0] == "0") {
+                netIn2Hidd[from][dest] = weight;
+            }
+            else{
+                netHidd2Out[from][dest] = weight;
+            }
+            
+        }
+        
+        if (line == "[net]") {
+            makeNetFlag = true;
+        }
+    }
+}
 
 
 std::vector<std::string> neuralNetwork::split(std::string input,char separator){
