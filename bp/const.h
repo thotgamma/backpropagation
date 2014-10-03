@@ -9,8 +9,8 @@
 #ifndef bp_const_h
 #define bp_const_h
 
-const int CC_numberOfCoreIn = 3;
-const int CC_numberOfCoreHidd = 9;
+const int CC_numberOfCoreIn = 2;
+const int CC_numberOfCoreHidd = 15;
 const int CC_numberOfCoreOut = 1;
 
 #endif

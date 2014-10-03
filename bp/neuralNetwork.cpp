@@ -207,50 +207,7 @@ void neuralNetwork::save(std::string filename){
     network_scc.close();
 }
 
-void neuralNetwork::load(std::string filename){
-    std::ifstream network(filename);
-    std::string line;
-    
-    std::vector <std::string> coreLineVector;
-    std::vector <std::string> netLineVector;
-    
-    int from;
-    int dest;
-    
-    double weight;
-    
-    bool makeNetFlag = false;
-    
-    while (std::getline(network, line)) {
-        if (line == "[core]") {
-            std::getline(network, line);
-            coreLineVector = split(line, ' ');
-            
-            makeNetFlag = false;
-            
-        }
-        
-        
-        if (makeNetFlag) {
-            netLineVector = split(line, ' ');
-            std::stringstream(netLineVector[1]) >> from;
-            std::stringstream(netLineVector[2]) >> dest;
-            std::stringstream(netLineVector[3]) >> weight;
-            
-            if (netLineVector[0] == "0") {
-                netIn2Hidd[from][dest] = weight;
-            }
-            else{
-                netHidd2Out[from][dest] = weight;
-            }
-            
-        }
-        
-        if (line == "[net]") {
-            makeNetFlag = true;
-        }
-    }
-}
+
 
 
 std::vector<std::string> neuralNetwork::split(std::string input,char separator){
