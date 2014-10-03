@@ -7,9 +7,25 @@
 //
 
 #include <iostream>
+#include "neuralNetwork.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    neuralNetwork nnet;
+    
+    
+    nnet.makeNewNetwork();
+    nnet.learn("input.txt", 0.5, 5000);
+    nnet.inputCore[1] = 0;
+    nnet.advanceCalc();
+    std::cout << "calc 0:" << nnet.outputCore[0] << std::endl;
+    nnet.inputCore[1] = 0.5;
+    nnet.advanceCalc();
+    std::cout << "calc 0.5:" << nnet.outputCore[0] << std::endl;
+    nnet.inputCore[1] = 1;
+    nnet.advanceCalc();
+    std::cout << "calc 1:" << nnet.outputCore[0] << std::endl;
+    
+    
     return 0;
 }

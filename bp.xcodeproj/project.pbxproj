@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4117653B19DEC82F00E658A7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4117653A19DEC82F00E658A7 /* main.cpp */; };
+		4117654319DEC8B600E658A7 /* neuralNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4117654119DEC8B600E658A7 /* neuralNetwork.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,9 @@
 /* Begin PBXFileReference section */
 		4117653719DEC82F00E658A7 /* bp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bp; sourceTree = BUILT_PRODUCTS_DIR; };
 		4117653A19DEC82F00E658A7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4117654119DEC8B600E658A7 /* neuralNetwork.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = neuralNetwork.cpp; sourceTree = "<group>"; };
+		4117654219DEC8B600E658A7 /* neuralNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neuralNetwork.h; sourceTree = "<group>"; };
+		4117654419DED4B100E658A7 /* const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +61,10 @@
 		4117653919DEC82F00E658A7 /* bp */ = {
 			isa = PBXGroup;
 			children = (
+				4117654419DED4B100E658A7 /* const.h */,
 				4117653A19DEC82F00E658A7 /* main.cpp */,
+				4117654219DEC8B600E658A7 /* neuralNetwork.h */,
+				4117654119DEC8B600E658A7 /* neuralNetwork.cpp */,
 			);
 			path = bp;
 			sourceTree = "<group>";
@@ -119,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4117653B19DEC82F00E658A7 /* main.cpp in Sources */,
+				4117654319DEC8B600E658A7 /* neuralNetwork.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
