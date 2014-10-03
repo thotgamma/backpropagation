@@ -12,6 +12,7 @@ neuralNetwork::neuralNetwork(){
     
 }
 
+//重みをランダムに決定
 void neuralNetwork::makeNewNetwork(){
     std::random_device rd;
     std::mt19937 mt(rd());
@@ -33,6 +34,7 @@ void neuralNetwork::makeNewNetwork(){
 
 }
 
+//前向き計算
 void neuralNetwork::advanceCalc(){
     
     /*
@@ -42,37 +44,44 @@ void neuralNetwork::advanceCalc(){
     }
     */
     
+    //入力層 -> 隠れ層
     for (int i=0; i < CC_numberOfCoreIn; i++) {
         for (int j=0; j < CC_numberOfCoreHidd; j++) {
             hiddenCore[j] = hiddenCore[j] + inputCore[i] * netIn2Hidd[i][j];
         }
     }
     
+    //隠れ層の値をシグモイド関数に通す
     for (int i=0; i < CC_numberOfCoreHidd; i++) {
         hiddenCore[i] = sigmoid(hiddenCore[i]);
     }
     
+    //隠れ層->出力層
     for (int i=0; i < CC_numberOfCoreHidd; i++) {
         for (int j=0; j < CC_numberOfCoreOut; j++) {
             outputCore[j] = outputCore[j] + hiddenCore[i] * netHidd2Out[i][j];
         }
     }
     
+    //出力層の値をシグモイド関数に通す
     for (int i=0; i < CC_numberOfCoreOut; i++) {
         outputCore[i] = sigmoid(outputCore[i]);
     }
-    //std::cout << outputCore[0] << std::endl;
 }
 
 void neuralNetwork::resetCores(){
+    //隠れ層の値を消去
     for (int i=0; i < CC_numberOfCoreHidd; i++) {
         hiddenCore[i] = 0;
     }
+    //出力層の値を消去
     for (int i=0; i < CC_numberOfCoreOut; i++) {
         outputCore[i] = 0;
     }
 }
 
+
+//後ろ向き計算
 void neuralNetwork::backwardCalc(double answer,double learningRate){
     
     for (int i=0; i < CC_numberOfCoreHidd; i++) {
@@ -97,7 +106,9 @@ void neuralNetwork::backwardCalc(double answer,double learningRate){
     }
 }
 
+
 void neuralNetwork::learn(std::string filename, double learningRate, int roops){
+    
     std::vector<std::string> splitedTeachData;
     
     std::vector<std::string> answerGroupVector;
@@ -135,11 +146,10 @@ void neuralNetwork::learn(std::string filename, double learningRate, int roops){
             //値のセット
             for (int i=1; i < CC_numberOfCoreIn; i++) {
                 std::stringstream(inputTokenVector[i-1]) >> inputCore[i];
-                //std::cout << "set:" << inputCore[i] << std::endl;
             }
+            
             advanceCalc();
-            backwardCalc(learningRate, answer);
-            //std::cout << "ans:" << answer << std::endl;
+            backwardCalc(answer,learningRate);
             diff = diff + pow(outputCore[0]-answer, 2);
             resetCores();
         }
