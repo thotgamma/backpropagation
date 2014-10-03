@@ -44,7 +44,7 @@ void neuralNetwork::advanceCalc(){
     
     for (int i=0; i < CC_numberOfCoreIn; i++) {
         for (int j=0; j < CC_numberOfCoreHidd; j++) {
-            hiddenCore[j] = inputCore[i] * netIn2Hidd[i][j];
+            hiddenCore[j] = hiddenCore[j] + inputCore[i] * netIn2Hidd[i][j];
         }
     }
     
@@ -54,7 +54,7 @@ void neuralNetwork::advanceCalc(){
     
     for (int i=0; i < CC_numberOfCoreHidd; i++) {
         for (int j=0; j < CC_numberOfCoreOut; j++) {
-            outputCore[j] = hiddenCore[i] * netHidd2Out[i][j];
+            outputCore[j] = outputCore[j] + hiddenCore[i] * netHidd2Out[i][j];
         }
     }
     
@@ -64,14 +64,22 @@ void neuralNetwork::advanceCalc(){
     //std::cout << outputCore[0] << std::endl;
 }
 
+void neuralNetwork::resetCores(){
+    for (int i=0; i < CC_numberOfCoreHidd; i++) {
+        hiddenCore[i] = 0;
+    }
+    for (int i=0; i < CC_numberOfCoreOut; i++) {
+        outputCore[i] = 0;
+    }
+}
 
 void neuralNetwork::backwardCalc(double answer,double learningRate){
     
     for (int i=0; i < CC_numberOfCoreHidd; i++) {
         for (int j=0; j < CC_numberOfCoreOut; j++) {
             double fix = learningRate * (answer - outputCore[j]) * outputCore[j] * (1 - outputCore[j]) * hiddenCore[i];
-            netHidd2Out[i][j] = netHidd2Out[i][j] + fix;
             fixTmp[i] = fixTmp[i] + fix * netHidd2Out[i][j];
+            netHidd2Out[i][j] = netHidd2Out[i][j] + fix;
             //std::cout << "fix:" << fix << std::endl;
             
         }
@@ -133,6 +141,7 @@ void neuralNetwork::learn(std::string filename, double learningRate, int roops){
             backwardCalc(learningRate, answer);
             //std::cout << "ans:" << answer << std::endl;
             diff = diff + pow(outputCore[0]-answer, 2);
+            resetCores();
         }
         
         

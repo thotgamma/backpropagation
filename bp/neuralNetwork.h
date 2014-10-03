@@ -43,6 +43,7 @@ public:
     void advanceCalc();
     void backwardCalc(double answer,double learningRate);
     double sigmoid(double input);
+    void resetCores();
     void learn(std::string filename,double learningRate,int roops);
     std::vector<std::string> split(std::string input,char separator);
 };

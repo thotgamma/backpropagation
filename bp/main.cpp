@@ -19,12 +19,15 @@ int main(int argc, const char * argv[]) {
     nnet.inputCore[1] = 0;
     nnet.advanceCalc();
     std::cout << "calc 0:" << nnet.outputCore[0] << std::endl;
+    nnet.resetCores();
     nnet.inputCore[1] = 0.5;
     nnet.advanceCalc();
     std::cout << "calc 0.5:" << nnet.outputCore[0] << std::endl;
+    nnet.resetCores();
     nnet.inputCore[1] = 1;
     nnet.advanceCalc();
     std::cout << "calc 1:" << nnet.outputCore[0] << std::endl;
+    nnet.resetCores();
     
     
     return 0;
