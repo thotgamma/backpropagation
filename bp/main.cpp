@@ -28,23 +28,20 @@ int main(int argc, const char * argv[]) {
         nnetLauncher(inputVector);
     }
     */
-    
-    nnet.learn("input.txt", 0.5, 5000);
+    nnet.makeNewNetwork();
+    nnet.learn("input.txt", 0.5, 1000);
     
     nnet.inputCore[1] = 0;
-    nnet.inputCore[2] = 0;
     nnet.advanceCalc();
     std::cout << "calc 0:" << nnet.outputCore[0] << std::endl;
     nnet.resetCores();
     
     nnet.inputCore[1] = 0.5;
-    nnet.inputCore[2] = 0.5;
     nnet.advanceCalc();
     std::cout << "calc 0.5:" << nnet.outputCore[0] << std::endl;
     nnet.resetCores();
     
     nnet.inputCore[1] = 0.2;
-    nnet.inputCore[2] = 0.3;
     nnet.advanceCalc();
     std::cout << "calc 1:" << nnet.outputCore[0] << std::endl;
     nnet.resetCores();
