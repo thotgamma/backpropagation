@@ -15,7 +15,7 @@ bool nnetLauncher(std::vector<std::string> inputVector);
 
 int main(int argc, const char * argv[]) {
     
-    nnet.makeNewNetwork();
+    //nnet.makeNewNetwork();
     
     
     std::vector<std::string> inputVector;
@@ -69,7 +69,7 @@ bool nnetLauncher(std::vector<std::string> inputVector){
             std::cout << "構文エラー:[load ファイル名]" << std::endl;
             return false;
         }
-        //nnet.load(inputVector[1]);
+        nnet.load(inputVector[1]);
         return true;
         
 #pragma mark command:save
@@ -93,7 +93,7 @@ bool nnetLauncher(std::vector<std::string> inputVector){
         std::stringstream(inputVector[2])>>learningRate;
         int roops;
         std::stringstream(inputVector[3])>>roops;
-        nnet.learn(filename, learningRate, roops);
+        std::cout << "diff:" << nnet.learn(filename, learningRate, roops) << std::endl;
         return true;
         
 #pragma mark command:calc
