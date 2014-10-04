@@ -14,7 +14,7 @@ int main(int argc, const char * argv[]) {
     
     neuralNetwork nnet;
     nnet.makeNewNetwork();
-    nnet.learn("input_1.txt", 0.3, 500000);
+    nnet.learn("input_1.txt", 0.3, 5000);
     
     /*
     nnet.inputCore[1] = 0.968627;
